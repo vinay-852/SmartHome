@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { 
   logAccess, 
-  getLogs, 
-  setUsername, 
+  getLogs,
   addUser, 
   getLogsByDevice, 
   getLogsByUser, 
@@ -42,23 +41,6 @@ router.get('/getLogs', async (req, res) => {
   }
 });
 
-// Route to set username for an account
-router.post('/setUsername', async (req, res) => {
-  const { username } = req.body;
-
-  // Validate input
-  if (!username) {
-    return res.status(400).json({ error: 'Missing required field: username' });
-  }
-
-  try {
-    const txHash = await setUsername(username);
-    res.status(200).json({ message: 'Username set successfully', txHash });
-  } catch (error) {
-    console.error('Error setting username:', error);
-    res.status(500).json({ error: 'Error setting username' });
-  }
-});
 
 // Route to add a new user
 router.post('/addUser', async (req, res) => {
