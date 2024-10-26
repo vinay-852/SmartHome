@@ -24,3 +24,4 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/logs', logsRoute);
+app.use('/api/auth', require('./routes/auth'));
