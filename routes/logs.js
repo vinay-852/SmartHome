@@ -43,6 +43,7 @@ router.get('/getLogs', async (req, res) => {
   }
 });
 
+
 // Route to add a new user
 router.post('/addUser', async (req, res) => {
   const { username, userAddress } = req.body;
