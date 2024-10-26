@@ -273,21 +273,6 @@ const contractABI = [
 const contractAddress = process.env.CONTRACT_ADDRESS;
 const contract = new web3.eth.Contract(contractABI, contractAddress);
 
-// Function to set a username
-async function setUsername(username) {
-  try {
-    const tx = contract.methods.setUsername(username);
-    const gas = await tx.estimateGas({ from: account.address });
-    const receipt = await tx.send({ from: account.address, gas });
-    console.log('Username set:', username);
-    
-    return receipt.transactionHash;
-  } catch (error) {
-    console.error('Error setting username:', error);
-    throw error;
-  }
-}
-
 // Function to log access with deviceID and action
 async function logAccess(deviceID, action) {
   try {
@@ -432,7 +417,6 @@ fetchBlockNumber();
 
 // Export functions for use in other files
 module.exports = { 
-  setUsername, 
   logAccess, 
   getLogs, 
   addUser, 
