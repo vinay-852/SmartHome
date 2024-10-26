@@ -19,6 +19,8 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+app.get('/', (req, res) => {
+  res.send('Welcome to the Smart Home Transaction API');
+});
 
 app.use('/api/logs', logsRoute);

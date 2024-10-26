@@ -43,6 +43,7 @@ router.post('/setUsername', async (req, res) => {
   try {
     const txHash = await setUsername(username);
     res.status(200).json({ message: 'Username set successfully', txHash });
+    res.send('Username set successfully');
   } catch (error) {
     console.error('Error setting username:', error);
     res.status(500).json({ error: 'Error setting username' });

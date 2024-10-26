@@ -13,9 +13,10 @@ if (!process.env.PRIVATE_KEY || !process.env.CONTRACT_ADDRESS) {
 // Ensure the private key is properly formatted
 const privateKey = process.env.PRIVATE_KEY;
 
+let account;
 try {
   // Initialize account with private key
-  const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+  account = web3.eth.accounts.privateKeyToAccount(privateKey);
   web3.eth.accounts.wallet.add(account);
   web3.eth.defaultAccount = account.address;
   console.log('Account successfully added:', account.address);
@@ -86,6 +87,7 @@ async function setUsername(username) {
     const gas = await tx.estimateGas({ from: account.address });
     const receipt = await tx.send({ from: account.address, gas });
     console.log('Username set:', username);
+    
     return receipt.transactionHash;
   } catch (error) {
     console.error('Error setting username:', error);
