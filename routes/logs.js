@@ -9,20 +9,22 @@ const {
   revokeUserAccess, 
   getOwner, 
   checkUserAccess, 
-  getUserAddress 
+  getUserAddress,
+  updateUser,
+  getDeviceStatus,
+  getAllUsers
 } = require('../blockchain/contract');
 
 // Route to log an access attempt
 router.post('/logAccess', async (req, res) => {
-  const { deviceID, action } = req.body;
+  const { deviceID, action, username } = req.body;
 
-  // Validate input
-  if (!deviceID || !action) {
-    return res.status(400).json({ error: 'Missing required fields: deviceID and action' });
+  if (!deviceID || !action || !username) {
+    return res.status(400).json({ error: 'Missing required fields: deviceID, action, and username' });
   }
 
   try {
-    const txHash = await logAccess(deviceID, action);
+    const txHash = await logAccess(deviceID, action, username);
     res.status(200).json({ message: 'Access logged successfully', txHash });
   } catch (error) {
     console.error('Error logging access attempt:', error);
@@ -41,12 +43,10 @@ router.get('/getLogs', async (req, res) => {
   }
 });
 
-
 // Route to add a new user
 router.post('/addUser', async (req, res) => {
   const { username, userAddress } = req.body;
 
-  // Validate input
   if (!username || !userAddress) {
     return res.status(400).json({ error: 'Missing required fields: username and userAddress' });
   }
@@ -64,7 +64,6 @@ router.post('/addUser', async (req, res) => {
 router.get('/getLogsByDevice', async (req, res) => {
   const { deviceID } = req.query;
 
-  // Validate input
   if (!deviceID) {
     return res.status(400).json({ error: 'Missing required field: deviceID' });
   }
@@ -82,7 +81,6 @@ router.get('/getLogsByDevice', async (req, res) => {
 router.get('/getLogsByUser', async (req, res) => {
   const { username } = req.query;
 
-  // Validate input
   if (!username) {
     return res.status(400).json({ error: 'Missing required field: username' });
   }
@@ -100,7 +98,6 @@ router.get('/getLogsByUser', async (req, res) => {
 router.post('/revokeUserAccess', async (req, res) => {
   const { username } = req.body;
 
-  // Validate input
   if (!username) {
     return res.status(400).json({ error: 'Missing required field: username' });
   }
@@ -129,7 +126,6 @@ router.get('/getOwner', async (req, res) => {
 router.get('/checkUserAccess', async (req, res) => {
   const { username } = req.query;
 
-  // Validate input
   if (!username) {
     return res.status(400).json({ error: 'Missing required field: username' });
   }
@@ -147,7 +143,6 @@ router.get('/checkUserAccess', async (req, res) => {
 router.get('/getUserAddress', async (req, res) => {
   const { username } = req.query;
 
-  // Validate input
   if (!username) {
     return res.status(400).json({ error: 'Missing required field: username' });
   }
@@ -158,6 +153,51 @@ router.get('/getUserAddress', async (req, res) => {
   } catch (error) {
     console.error('Error fetching user address:', error);
     res.status(500).json({ error: 'Error fetching user address' });
+  }
+});
+
+// Route to update a user
+router.post('/updateUser', async (req, res) => {
+  const { username, newAddress } = req.body;
+
+  if (!username || !newAddress) {
+    return res.status(400).json({ error: 'Missing required fields: username and newAddress' });
+  }
+
+  try {
+    const txHash = await updateUser(username, newAddress);
+    res.status(200).json({ message: 'User updated successfully', txHash });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Error updating user' });
+  }
+});
+
+// Route to get the status of a device
+router.get('/getDeviceStatus', async (req, res) => {
+  const { deviceID } = req.query;
+
+  if (!deviceID) {
+    return res.status(400).json({ error: 'Missing required field: deviceID' });
+  }
+
+  try {
+    const status = await getDeviceStatus(deviceID);
+    res.status(200).json({ status });
+  } catch (error) {
+    console.error('Error fetching device status:', error);
+    res.status(500).json({ error: 'Error fetching device status' });
+  }
+});
+
+// Route to get all users
+router.get('/getAllUsers', async (req, res) => {
+  try {
+    const users = await getAllUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error fetching all users:', error);
+    res.status(500).json({ error: 'Error fetching all users' });
   }
 });
 
