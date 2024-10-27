@@ -1,0 +1,40 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/vinaypepakayala/Desktop/Code/Hackathon/SmartHome-Contract/contracts/SmartHomeContract.sol": {
+      "lastModificationDate": 1730008404584,
+      "contentHash": "924b17d71334cbfe6e965e3be95033bc",
+      "sourceName": "contracts/SmartHomeContract.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SmartHomeSecurity"
+      ]
+    }
+  }
+}
