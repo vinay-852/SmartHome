@@ -27,271 +27,291 @@ try {
 
 // Define contract ABI and initialize contract instance
 const contractABI = [
-  {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "username",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "addUser",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getLogs",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "user",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "deviceID",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "action",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "username",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct SmartHomeSecurity.AccessLog[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "deviceID",
-        "type": "string"
-      }
-    ],
-    "name": "getLogsByDevice",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "user",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "deviceID",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "action",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "username",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct SmartHomeSecurity.AccessLog[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "username",
-        "type": "string"
-      }
-    ],
-    "name": "getLogsByUser",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "user",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "deviceID",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "action",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "username",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct SmartHomeSecurity.AccessLog[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "deviceID",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "action",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "username",
-        "type": "string"
-      }
-    ],
-    "name": "logAccess",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "username",
-        "type": "string"
-      }
-    ],
-    "name": "revokeUserAccess",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "name": "userAccess",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "name": "userAddresses",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  }
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "username",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "userAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "presentUser",
+				"type": "address"
+			}
+		],
+		"name": "addUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "deviceID",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "action",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "username",
+				"type": "string"
+			}
+		],
+		"name": "logAccess",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "username",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "presentUser",
+				"type": "address"
+			}
+		],
+		"name": "revokeUserAccess",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "getLogs",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "deviceID",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "username",
+						"type": "string"
+					}
+				],
+				"internalType": "struct SmartHomeSecurity.AccessLog[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "deviceID",
+				"type": "string"
+			}
+		],
+		"name": "getLogsByDevice",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "deviceID",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "username",
+						"type": "string"
+					}
+				],
+				"internalType": "struct SmartHomeSecurity.AccessLog[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "username",
+				"type": "string"
+			}
+		],
+		"name": "getLogsByUser",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "deviceID",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "username",
+						"type": "string"
+					}
+				],
+				"internalType": "struct SmartHomeSecurity.AccessLog[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getPresentUserAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "userAccess",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "userAddresses",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ];
 const contractAddress = process.env.CONTRACT_ADDRESS;
 const contract = new web3.eth.Contract(contractABI, contractAddress);
 
-// Function to set a username
-async function setUsername(username) {
-  try {
-    const tx = contract.methods.setUsername(username);
-    const gas = await tx.estimateGas({ from: account.address });
-    const receipt = await tx.send({ from: account.address, gas });
-    console.log('Username set:', username);
-    
-    return receipt.transactionHash;
+async function getPresentUserAddress() {
+	  try {
+	const presentUserAddress = await contract.methods.getPresentUserAddress().call();
+	console.log('Present User Address:', presentUserAddress);
+	return presentUserAddress;
   } catch (error) {
-    console.error('Error setting username:', error);
-    throw error;
+	console.error('Error fetching present user address:', error);
+	throw error;
   }
 }
 
+
 // Function to log access with deviceID and action
-async function logAccess(deviceID, action) {
+async function logAccess(deviceID, action, username) {
   try {
-    const tx = contract.methods.logAccess(deviceID, action);
+    const tx = contract.methods.logAccess(deviceID, action, username);
     const gas = await tx.estimateGas({ from: account.address });
     const receipt = await tx.send({ from: account.address, gas });
     console.log('Access logged:', receipt.transactionHash);
@@ -303,26 +323,30 @@ async function logAccess(deviceID, action) {
 }
 
 // Function to fetch all logs
+// Function to fetch all logs
 async function getLogs() {
-  try {
-    const logs = await contract.methods.getLogs().call();
-    return logs.map(log => ({
-      user: log.user,
-      timestamp: new Date(log.timestamp * 1000).toISOString(), // Convert timestamp to readable format
-      deviceID: log.deviceID,
-      action: log.action,
-      username: log.username
-    }));
-  } catch (error) {
-    console.error('Error fetching logs:', error);
-    throw error;
+	try {
+	  const logs = await contract.methods.getLogs().call();
+	  // Convert BigInt values to strings before returning
+	  const formattedLogs = logs.map(log => ({
+		user: log.user,
+		timestamp: log.timestamp.toString(), // Convert BigInt to string
+		deviceID: log.deviceID,
+		action: log.action,
+		username: log.username
+	  }));
+	  return JSON.stringify(formattedLogs);
+	} catch (error) {
+	  console.error('Error fetching logs:', error);
+	  throw error;
+	}
   }
-}
+  
 
 // Function to add a new user
-async function addUser(username, userAddress) {
+async function addUser(username, userAddress, presentUser) {
   try {
-    const tx = contract.methods.addUser(username, userAddress);
+    const tx = contract.methods.addUser(username, userAddress, presentUser);
     const gas = await tx.estimateGas({ from: account.address });
     const receipt = await tx.send({ from: account.address, gas });
     console.log('User added:', username);
@@ -370,7 +394,7 @@ async function getLogsByUser(username) {
 // Function to revoke user access
 async function revokeUserAccess(username) {
   try {
-    const tx = contract.methods.revokeUserAccess(username);
+    const tx = contract.methods.revokeUserAccess(username, presentUser);
     const gas = await tx.estimateGas({ from: account.address });
     const receipt = await tx.send({ from: account.address, gas });
     console.log('User access revoked:', username);
@@ -431,8 +455,7 @@ async function fetchBlockNumber() {
 fetchBlockNumber();
 
 // Export functions for use in other files
-module.exports = { 
-  setUsername, 
+module.exports = {  
   logAccess, 
   getLogs, 
   addUser, 
@@ -441,5 +464,6 @@ module.exports = {
   revokeUserAccess, 
   getOwner, 
   checkUserAccess, 
-  getUserAddress 
+  getUserAddress,
+  getPresentUserAddress
 };

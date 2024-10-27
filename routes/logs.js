@@ -46,14 +46,14 @@ router.get('/getLogs', async (req, res) => {
 
 // Route to add a new user
 router.post('/addUser', async (req, res) => {
-  const { username, userAddress } = req.body;
+  const { username, userAddress, presentUser } = req.body;
 
   if (!username || !userAddress) {
     return res.status(400).json({ error: 'Missing required fields: username and userAddress' });
   }
 
   try {
-    const txHash = await addUser(username, userAddress);
+    const txHash = await addUser(username, userAddress,presentUser);
     res.status(200).json({ message: 'User added successfully', txHash });
   } catch (error) {
     console.error('Error adding user:', error);
@@ -97,14 +97,14 @@ router.get('/getLogsByUser', async (req, res) => {
 
 // Route to revoke user access
 router.post('/revokeUserAccess', async (req, res) => {
-  const { username } = req.body;
+  const { username, presentUser } = req.body;
 
   if (!username) {
     return res.status(400).json({ error: 'Missing required field: username' });
   }
 
   try {
-    const txHash = await revokeUserAccess(username);
+    const txHash = await revokeUserAccess(username, presentUser);
     res.status(200).json({ message: 'User access revoked successfully', txHash });
   } catch (error) {
     console.error('Error revoking user access:', error);
