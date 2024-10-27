@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../schema');
 const router = express.Router();
 const { 
   logAccess, 
