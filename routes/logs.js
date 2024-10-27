@@ -201,5 +201,50 @@ router.get('/getAllUsers', async (req, res) => {
     res.status(500).json({ error: 'Error fetching all users' });
   }
 });
+router.post('/login', async (req, res) => {
+  try {
+      const { username, password } = req.body;
+
+      console.log(username, password);
+      
+
+      if (!username || !password) {
+          return res.status(400).json({ message: 'username and password are required' });
+      }
+
+      const user = await User.findOne({ username });
+      console.log(user);
+
+
+      if (!user) {
+          return res.status(401).json({ message: 'Invalid credentials' });
+      }
+
+      const isMatch = user.password == password;
+
+      if (!isMatch) {
+          return res.status(401).json({ message: 'Invalid credentials' });
+      }
+
+      res.json({
+          username: user.username
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.post('/signup', async (req, res) => {
+  try {
+      const { username, password } = req.body;
+      console.log(username, password);
+
+      const newUser = await User.create({ username:username, password:password });
+      res.status(201).json(newUser);
+  } catch (error) {
+      res.status(400).json({ "error": error });
+  }
+});
 
 module.exports = router;
